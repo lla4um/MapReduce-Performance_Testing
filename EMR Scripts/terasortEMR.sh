@@ -7,17 +7,19 @@ trap "" HUP
 #   exit 1
 #fi
 
-MR_EXAMPLES_JAR=/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples-2.7.3-amzn-0.jar
+#MR_EXAMPLES_JAR=/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples-2.7.3-amzn-0.jar
+MR_EXAMPLES_JAR=/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar
 
 
 #SIZE=500G
-#SIZE=100G
-SIZE=1T
+SIZE=100G
+#SIZE=1T
 #SIZE=1G
 #SIZE=10G
 #INPUT=/${SIZE}-terasort-input
 #OUTPUT=/${SIZE}-terasort-output
 
+S3BUCKET=jimmy.emr
 
 LOGDIR=logs
 
@@ -26,13 +28,13 @@ then
     mkdir ./$LOGDIR
 fi
 
-DATE=`date +%Y-%m-%d:%H:%M:%S`
+DATE=`date +%Y-%m-%d.%H.%M.%S`
 
 RESULTSFILE="./$LOGDIR/terasort_results_$DATE"
 
 
-INPUT=s3://sunileman1/data/sandbox/poc/teragen/${SIZE}-terasort-input
-OUTPUT=s3://sunileman1/data/sandbox/poc/teragen/${SIZE}-terasort-output
+INPUT=s3://$S3BUCKET/data/poc/teragen/$SIZE-terasort-input
+OUTPUT=s3://$S3BUCKET/data/sandbox/poc/teragen/SIZE-terasort-output-$DATE
 
 # terasort.sh
 # Kill any running MapReduce jobs
