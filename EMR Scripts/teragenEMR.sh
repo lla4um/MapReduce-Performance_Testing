@@ -15,9 +15,10 @@ MR_EXAMPLES_JAR=/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar
 
 case "$1" in 
   "")
-			 echo ""
-			 echo "Usage: teragenEMR.sh <SIZE>"
+    echo ""
+    echo "Usage: teragenEMR.sh <SIZE>"
     echo "     SIZE=1T,500G,100G,10G,1G"
+    exit
     ;;
   *1T*)
     SIZE=1T
