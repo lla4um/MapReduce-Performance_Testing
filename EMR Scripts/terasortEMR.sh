@@ -35,7 +35,7 @@ RESULTSFILE="./$LOGDIR/terasort_results_$DATE"
 
 
 INPUT=s3://$S3BUCKET/data/poc/teragen/$SIZE-terasort-input
-OUTPUT=s3://$S3BUCKET/data/sandbox/poc/teragen/$SIZE-terasort-output$2
+OUTPUT=s3://$S3BUCKET/data/poc/teragen/$SIZE-terasort-output$2
 
 # terasort.sh
 # Kill any running MapReduce jobs
