@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# adding some imple args for now. $1 is size, $2 is run number
+#TODO: Make more robust
 trap "" HUP
 
 #if [ $EUID -eq 0 ]; then
@@ -10,9 +11,9 @@ trap "" HUP
 #MR_EXAMPLES_JAR=/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples-2.7.3-amzn-0.jar
 MR_EXAMPLES_JAR=/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar
 
-
+SIZE=$1
 #SIZE=500G
-SIZE=100G
+#SIZE=100G
 #SIZE=1T
 #SIZE=1G
 #SIZE=10G
@@ -34,11 +35,11 @@ RESULTSFILE="./$LOGDIR/terasort_results_$DATE"
 
 
 INPUT=s3://$S3BUCKET/data/poc/teragen/$SIZE-terasort-input
-OUTPUT=s3://$S3BUCKET/data/sandbox/poc/teragen/SIZE-terasort-output-$DATE
+OUTPUT=s3://$S3BUCKET/data/sandbox/poc/teragen/$SIZE-terasort-output$2
 
 # terasort.sh
 # Kill any running MapReduce jobs
-mapred job -list | grep job_ | awk ' { system("mapred job -kill " $1) } '
+#mapred job -list | grep job_ | awk ' { system("mapred job -kill " $1) } '
 # Delete the output directory
 hadoop fs -rm -r -f -skipTrash ${OUTPUT}
 
