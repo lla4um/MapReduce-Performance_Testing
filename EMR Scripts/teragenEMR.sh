@@ -1,8 +1,9 @@
 #!/bin/bash
-
-trap "" HUP
 # adding some imple args for now. $1 is size
 #TODO: Make more robust
+
+trap "" HUP
+
 #if [ $EUID -eq 0 ]; then
 #   echo "this script must not be run as root. su to hdfs user to run"
 #   exit 1
