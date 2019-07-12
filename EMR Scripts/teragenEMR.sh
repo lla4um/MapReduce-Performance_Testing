@@ -1,14 +1,44 @@
 #!/bin/bash
 
 trap "" HUP
-
+# adding some imple args for now. $1 is size
+#TODO: Make more robust
 #if [ $EUID -eq 0 ]; then
 #   echo "this script must not be run as root. su to hdfs user to run"
 #   exit 1
 #fi
 
 #MR_EXAMPLES_JAR=/usr/hdp/2.2.0.0-2041/hadoop-mapreduce/hadoop-mapreduce-examples.jar
-MR_EXAMPLES_JAR=/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples-2.7.3-amzn-0.jar
+#MR_EXAMPLES_JAR=/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples-2.7.3-amzn-0.jar
+MR_EXAMPLES_JAR=/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar
+
+case "$1" in 
+  "")
+			 echo ""
+			 echo "Usage: teragenEMR.sh <SIZE>"
+    echo "     SIZE=1T,500G,100G,10G,1G"
+    ;;
+  *1T*)
+    SIZE=1T
+    ROWS=10000000000
+    ;;
+  *500G*)
+    SIZE=500G
+    ROWS=5000000000
+    ;;
+  *100G*)
+    SIZE=100G
+    ROWS=1000000000
+    ;;
+  *10G*)
+    SIZE=10G
+    ROWS=100000000
+    ;;
+  *1G*)
+    SIZE=1G
+    ROWS=10000000
+    ;;
+esac
 
 #SIZE=500G
 #ROWS=5000000000
@@ -16,8 +46,8 @@ MR_EXAMPLES_JAR=/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples-2.7.3-amzn-0
 #SIZE=100G
 #ROWS=1000000000
 
- SIZE=1T
- ROWS=10000000000
+ #SIZE=1T
+ #ROWS=10000000000
 
 # SIZE=10G
 # ROWS=100000000
@@ -38,7 +68,7 @@ DATE=`date +%Y-%m-%d:%H:%M:%S`
 RESULTSFILE="./$LOGDIR/teragen_results_$DATE"
 
 
-OUTPUT=s3://sunileman1/data/sandbox/poc/teragen/${SIZE}-terasort-input
+OUTPUT=s3://sunileman1/data/sandbox/poc/teragen/$SIZE-terasort-input
 
 # teragen.sh
 # Kill any running MapReduce jobs
