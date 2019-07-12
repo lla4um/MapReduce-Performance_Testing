@@ -41,6 +41,8 @@ case "$1" in
     ;;
 esac
 
+S3BUCKET=jimmy.emr
+
 #SIZE=500G
 #ROWS=5000000000
 
@@ -69,7 +71,7 @@ DATE=`date +%Y-%m-%d:%H:%M:%S`
 RESULTSFILE="./$LOGDIR/teragen_results_$DATE"
 
 
-OUTPUT=s3://sunileman1/data/sandbox/poc/teragen/$SIZE-terasort-input
+OUTPUT=s3://$S3BUCKET/data/poc/teragen/$SIZE-terasort-input
 
 # teragen.sh
 # Kill any running MapReduce jobs
